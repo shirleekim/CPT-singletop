@@ -14,6 +14,8 @@ using namespace std;
 int main (){
 
   string version = "_mg2";
+  string simulation_t = "MG2";
+  string simulation_tbar = "MG2";
 
   int nbevent = 100000; // version original : 1000000, // version 2020 : 100000
 
@@ -57,9 +59,9 @@ int main (){
   {
     root_simu* go;
     if (diagram == "t")
-    go = new root_simu("MG3.root");
+    go = new root_simu(simulation_t+".root");
     if (diagram == "tbar")
-    go = new root_simu("MG3.root"); //**************************
+    go = new root_simu(simulation_tbar"+.root"); //**************************
     go->Loop();
     int Events = go->fChain->GetEntriesFast();
 
