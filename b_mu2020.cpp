@@ -61,7 +61,7 @@ int main (){
     if (diagram == "t")
     go = new root_simu(simulation_t+".root");
     if (diagram == "tbar")
-    go = new root_simu(simulation_tbar"+.root"); //**************************
+    go = new root_simu(simulation_tbar+".root"); //**************************
     go->Loop();
     int Events = go->fChain->GetEntriesFast();
 
@@ -274,7 +274,7 @@ TGraph* grapht = new TGraph (48);
 TGraph* graphSM = new TGraph(48);
 
 double ft = 0;
-double xi_1 = sin(46.309)*cos(101.290);
+double xi_1 = sin(46.309)*cos(101.2790);
 double xi_2 = sin(101.2790);
 double xi_3 = cos(46.309)*cos(101.2790);
 
