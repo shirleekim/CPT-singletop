@@ -12,13 +12,12 @@
 #include <TH1F.h>
 #include <TLine.h>
 #include <sstream>
+#include "../include/setting.hpp"
 
 using namespace std;
 int main ()
 {
-  // (mg0 doesn't exist, so put "")
-  string version = "_mg2";
-  double b_mu=100;
+  setting();
 
   string nameFile1 = "results/histo/hist_tchannel"+version+".root";
   string nameFile2 = "results/histo/hist_tbarchannel"+version+".root";
@@ -32,7 +31,7 @@ int main ()
   auto legend = new TLegend(0.65,0.75,0.90,0.85);
 
   //adapt for each simulation
-  double range = 100; //*********************** 7 for mg0, mg1, and  4000 for mg2, mg3 (b_mu=1) and 100 for mg2, mg3 (b_mu=100)
+  //double range = 7; // see setting.cpp 7
   int Nbin = 1e7;
   double pas = 2.0*range/(double) Nbin;
 
@@ -109,8 +108,8 @@ int main ()
   chiCarre->Write("chiCarre");
 
   //**** It gives delta bu (stat+syst) when we put syst != 1.0
-  //See the beginning of the program for b_mu
-  cout<<"statical error of b_mu when delta Chi^2 at 1 GeV = "<<b_mu*fithist->GetX(chiCarre->GetBinContent(chiCarre->GetMinimumBin())+1)<<endl;//modifier
+  //See setting.cpp for bmu
+  cout<<"statical error of b_mu when delta Chi^2 at 1 GeV = "<<bmu*fithist->GetX(chiCarre->GetBinContent(chiCarre->GetMinimumBin())+1)<<endl;//modifier
 
   chiCarre->SetLineColor(kRed);
   chiCarre->Draw();

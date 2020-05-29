@@ -8,20 +8,19 @@
 #include <TLegend.h>
 #include <TH2F.h>
 #include <sstream>
+#include "../include/setting.hpp"
 
 
 using namespace std;
 
 
 int main (){
-//////////////change for each simulation /////////////////////////
-  int nbevent = 100000; // Number of events simulation takes
 
-  string version = "_mg2";
-  string b_mu = "100";
+  setting();
 
-  double b_mu_chiSquare = 5.3; // change when temporal modulation histogram is needed. (it doesn't affect Xcarre.cpp or syst_error.cpp)
-//////////////////////////////////////////////////////////////////
+// change when temporal modulation histogram is needed. (it doesn't affect Xcarre.cpp or syst_error.cpp)
+  double b_mu_chiSquare = 5.3;
+
 
   string nameFile = "results/modulation/Modulation_Temporelle_13TeV_b"+b_mu+version+".root";
 

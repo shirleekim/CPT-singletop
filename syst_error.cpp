@@ -13,13 +13,12 @@
 #include <TH1F.h>
 #include <TLine.h>
 #include <sstream>
+#include "../include/setting.hpp"
 
 using namespace std;
 
 double calcul(double systttbar, double systmulti, double systsingletop, double systSingleTopbar, double systelectro, double lumi){
 
-  string version = "_mg2";
-  double b_mu=100;
 
 
   string nameFile1 = "results/histo/hist_tchannel"+version+".root";
@@ -30,8 +29,7 @@ double calcul(double systttbar, double systmulti, double systsingletop, double s
 
     TFile* Filetbar = TFile::Open(nameFile2.c_str());
 
-    double range = 100; //*********************** 7 for mg0, mg1, and  4000 for mg2, mg3
-
+    //double range = 7; // see setting.cpp
     int Nbin = 1e7;
     double pas =  2.0*range/(double) Nbin;
 
@@ -90,11 +88,12 @@ double calcul(double systttbar, double systmulti, double systsingletop, double s
     chiCarre->Fit(fithist,"R"); //minimisation
     //cout<<"Delta Chi at 1 GeV = "<<fithist->GetX(chiCarre->GetBinContent(chiCarre->GetMinimumBin())+1)<<endl;
   //**** pour bu (stat+syst) ^^^^^^^^si on met les syst != 1.0
-return b_mu*fithist->GetX(chiCarre->GetBinContent(chiCarre->GetMinimumBin())+1);
+return bmu*fithist->GetX(chiCarre->GetBinContent(chiCarre->GetMinimumBin())+1);
 }
 
 int main ()
 {
+  setting();
   //int nProcessus = 6;
   double statsyst1[6];
   double statsyst2[6];
