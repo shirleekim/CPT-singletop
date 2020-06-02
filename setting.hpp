@@ -9,10 +9,13 @@ using namespace std;
   string simulation_t ; // neccessary for b_mu2020
   string simulation_tbar; // neccessary for b_mu2020
   string b_mu ; // neccessary for b_mu2020, sensibility
-  double bmu; // neccessary for Xcarre, sys_error
+  double bmu; // neccessary for Xcarre, syst_error
   int nbevent;
 
-  double range ; // neccessary for Xcarre, sys_error
+  double range ; // neccessary for Xcarre, syst_error
+  double stat_error; // neccessary for sensibility
+  int modul_range;
+  int times; // for signal amplification (for modulation graph) //necessary for sensibility
 
 void setting (){
 do{
@@ -30,6 +33,9 @@ if (mg==0){
   b_mu = "1";
   bmu = 1;
   range = 7;
+  stat_error = 4.61;
+  modul_range = 1e5;
+  times = 10;
 
 }
 
@@ -42,6 +48,9 @@ if (mg==1){
   b_mu = "1";
   bmu = 1;
   range = 7;
+  stat_error = 4.67;
+  modul_range = 1e5;
+  times = 10;
 
 }
 
@@ -54,6 +63,9 @@ if (mg==2){
   b_mu = "100";
   bmu = 100;
   range = 20;
+  stat_error = 1511.39;
+  modul_range = 12e4;
+  times = 1;
 
 
 }
@@ -67,6 +79,9 @@ if (mg==3){
   b_mu = "100";
   bmu=100;
   range = 30;
+  stat_error = 2775.47;
+  modul_range = 12e4;
+  times = 1;
 
 }
 }

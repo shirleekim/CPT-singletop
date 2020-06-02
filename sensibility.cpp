@@ -19,7 +19,6 @@ int main (){
   setting();
 
 // change when temporal modulation histogram is needed. (it doesn't affect Xcarre.cpp or syst_error.cpp)
-  double b_mu_chiSquare = 5.3;
 
 
   string nameFile = "results/modulation/Modulation_Temporelle_13TeV_b"+b_mu+version+".root";
@@ -75,13 +74,13 @@ int main (){
     h3bgttbart->SetBinContent(i,backgroundt_1+backgroundt_2+backgroundt_3);
     h4bgMultit->SetBinContent(i,backgroundt_1);
     h2bggammat->SetBinContent(i,backgroundt_1+backgroundt_2);
-    h5ftsignt->SetBinContent(i, (backgroundt_1+backgroundt_2+backgroundt_3+backgroundt_4+backgroundt_4*Particle[k]*10*b_mu_chiSquare)); //signal x 10
+    h5ftsignt->SetBinContent(i, (backgroundt_1+backgroundt_2+backgroundt_3+backgroundt_4+backgroundt_4*Particle[k]*stat_error*times)); //signal x times(==10 for mg0,mg1)
     //h1sigt->SetBinError(i,sigmatott);
     h6errort->SetBinError(i, sigmatott);
     h6errort->SetBinContent(i, backgroundt_1+backgroundt_2+backgroundt_3+backgroundt_4);
     k+=2;
   }
-
+  string LabelSignal = Form("%d times expected signal b_{x} = %.2f GeV",times, stat_error);
   h1sigt->SetFillColor(kRed+1);
   h2bggammat->SetFillColor(kBlue+1);
   h3bgttbart->SetFillColor(kGreen+2);
@@ -91,8 +90,8 @@ int main (){
   legend->AddEntry(h2bggammat, "W/Z/#gamma + jets", "f");
   legend->AddEntry(h3bgttbart,"t#bar{t}/tW", "f");
   legend->AddEntry(h4bgMultit,"Multijet", "f");
-  legend->AddEntry(h5ftsignt,"10x expected signal b_{x} = 5.37 GeV","l");
-  h1sigt->GetYaxis()->SetRangeUser(0,100000); //commentaire? ********************************
+  legend->AddEntry(h5ftsignt,LabelSignal.c_str(),"l");
+  h1sigt->GetYaxis()->SetRangeUser(0,modul_range); //commentaire? ********************************
 
 
 
@@ -197,7 +196,7 @@ int main (){
     h4bgMultitbar->SetBinContent(i,backgroundtw_1);
     h2bggammatbar->SetBinContent(i,backgroundtw_1+backgroundtw_2);
     //antiparticle[k] : f(t) centree en 0 au
-    h5ftsigntbar->SetBinContent(i,(backgroundtw_1+backgroundtw_2+backgroundtw_3+backgroundtw_4)+backgroundtw_4*AntiParticle[k]*5.37*10);//commentaire
+    h5ftsigntbar->SetBinContent(i,(backgroundtw_1+backgroundtw_2+backgroundtw_3+backgroundtw_4)+backgroundtw_4*AntiParticle[k]*stat_error*times);//stat_error dans setting.cpp //10 times signal
     h6errortbar->SetBinContent(i,backgroundtw_1+backgroundtw_2+backgroundtw_3+backgroundtw_4);
     h6errortbar->SetBinError(i,sigmatottbar);
     k+=2;
@@ -214,9 +213,9 @@ int main (){
   legendtbar->AddEntry(h3bgttbart,"t#bar{t}/tW", "f");
   legendtbar->AddEntry(h2bggammat, "W/Z/#gamma* + jets", "f");
   legendtbar->AddEntry(h4bgMultit,"Multijet", "f");
-  legendtbar->AddEntry(h5ftsignt,"10x expected signal b_{x} = 5.37 GeV","l"); //commentaire?
+  legendtbar->AddEntry(h5ftsigntbar,LabelSignal.c_str(),"l");
 
-  h1sigtbar->GetYaxis()->SetRangeUser(0,nbevent);//*********************************
+  h1sigtbar->GetYaxis()->SetRangeUser(0,modul_range);//*********************************
   h1sigtbar->SetFillColor(kRed+1);
   h2bggammatbar->SetFillColor(kBlue+1);
   h3bgttbartbar->SetFillColor(kGreen+2);

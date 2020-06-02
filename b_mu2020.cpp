@@ -219,8 +219,8 @@ cout<<1<<endl;
 double ratiotq = 1.0/nbtq;
 double ratiotqbar=1.0/nbtqbar;
 double ratiotw = 1.0/nbtw;
-double pourctq = 1.0*nbtqprecut/nbevent; //original 1000000  **********************
-double pourctqbar = 1.0*nbtqbarprecut/nbevent; //original 1000000 ******************
+double pourctq = 1.0*nbtqprecut/nbevent;
+double pourctqbar = 1.0*nbtqbarprecut/nbevent;
 //If Wtw != 0 then Wtq and Wtqbar should be 0
 
 
@@ -284,9 +284,14 @@ double theta = 101.2790 * rad;
 double lambda = 46.309 * rad;
 double w = 2*M_PI/24;
 double ft = 0;
-double xi_1 = sin(lambda)*cos(theta);
-double xi_2 = sin(theta);
-double xi_3 = cos(lambda)*cos(theta);
+double sl_cth = sin(lambda)*cos(theta); // eta 1 dans le rapport de Sane
+double sth = sin(theta); // eta 2
+double cl_cth = cos(lambda)*cos(theta); // eta 3
+double cth = cos(theta);
+double sl_sth = sin(lambda)*sin(theta);
+double sl = sin(lambda);
+double cl_sth = cos(lambda)*sin(theta);
+double cl = cos(lambda);
 
 
 //Compute the temporal modulation of the top cross section
@@ -300,25 +305,26 @@ if (diagram == "tw" || diagram == "tbarw")
 
 int i = 0;
 for (double t=0; t<=24 ; t+=0.5)
-{//b -> B // WeightAverage  Av3 ==B0, Av0
-  ft = b_mu0[3]*WtAv[3] - b_mu0[0]*(xi_1*cos(w*t)+xi_2*sin(w*t))*WtAv[2]+b_mu0[1]*(xi_2*cos(w*t)-xi_1*sin(w*t))*WtAv[2]+b_mu0[2]*xi_3*WtAv[2];
+{//b -> B // WeightAverage  WtAv[2] ==B0, Av0
+  //delta P0/P = WtAv[3], deta P1/P = WtAv[0], deta P2/P = WtAv[1],  deta P3/P = WtAv[2]
+  // b_mu0[0] = b^1, b_mu1[1] = b^2, b_mu2[2] = b^3, b_mu3[3] = b^0
+  ft = b_mu0[0]*((cos(w*t)*sl_sth-sin(w*t)*cth)*WtAv[0]-(cos(w*t)*cl)*WtAv[1]+(cos(w*t)*sl_cth-sin(w*t)*sth)*WtAv[2]);
   graphx->SetPoint(i, t, ft);
-  cout<<ft<<endl;
+  //cout<<ft<<endl;
   if (ft>max) {do {max += 0.01;} while (ft>max);};
   if (ft<min) {do {min -=0.01;} while (ft<min);};
   //cout<<"min="<<min<<"  max="<<max<<endl;
-  ft = b_mu1[3]*WtAv[3] - b_mu1[0]*(xi_1*cos(w*t)+xi_2*sin(w*t))*WtAv[2]+b_mu1[1]*(xi_2*cos(w*t)-xi_1*sin(w*t))*WtAv[2]+b_mu1[2]*xi_3*WtAv[2];
+  ft = b_mu1[1]*((sin(w*t)*sl_sth+cos(w*t)*cth)*WtAv[0]-(sin(w*t)*cl)*WtAv[1]+(sin(w*t)*sl_cth+cos(w*t)*sth)*WtAv[2]);
   graphy->SetPoint(i, t, ft);
   if (ft>max) {do {max += 0.01;} while (ft>max);};
   if (ft<min) {do {min -=0.01;} while (ft<min);};
 
-  ft = b_mu2[3]*WtAv[3] - b_mu2[0]*(xi_1*cos(w*t)+xi_2*sin(w*t))*WtAv[2]+b_mu2[1]*(xi_2*cos(w*t)-xi_1*sin(w*t))*WtAv[2]+b_mu2[2]*xi_3*WtAv[2];
+  ft = -b_mu2[2]*((cl_sth)*WtAv[0]+(sl)*WtAv[2]+(cl_cth)*WtAv[2]);
   graphz->SetPoint(i, t, ft);
   if (ft>max) {do {max += 0.01;} while (ft>max);};
   if (ft<min) {do {min -=0.01;} while (ft<min);};
 
-
-  ft = b_mu3[3]*WtAv[3] - b_mu3[0]*(xi_1*cos(w*t)+xi_2*sin(w*t))*WtAv[2]+b_mu3[1]*(xi_2*cos(w*t)-xi_1*sin(w*t))*WtAv[2]+b_mu3[2]*xi_3*WtAv[2];
+  ft = b_mu3[3]*WtAv[3];
  grapht->SetPoint(i, t, ft);
   if (ft>max) {do {max += 0.01;} while (ft>max);};
   if (ft<min) {do {min -=0.01;} while (ft<min);};
