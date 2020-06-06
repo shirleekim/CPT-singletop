@@ -136,10 +136,6 @@ void Analyzetw::Loop()
         {
           pTmu[jentry] = Particle_PT[part];
           etamu[jentry]= abs(Particle_Eta[part]);
-          pTb[jentry]    = Particle_PT[part];
-          eta_b[jentry]  = abs(Particle_Eta[part]);
-          pTnon_b[jentry] = Particle_PT[part];
-          eta_non_b[jentry] = abs(Particle_Eta[part]);
         }
 
       }
