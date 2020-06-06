@@ -32,6 +32,10 @@ MatrixSingleTop::MatrixSingleTop (TLorentzVector pMother1_user, TLorentzVector b
   etaElec    = etaElec_user;
   pTmu       = pTmu_user;
   etamu      = etamu_user;
+  pTb        = pTb_user;
+  pTnon_b    = pTnon_b_user;
+  eta_b      = eta_b_user;
+  eta_non_b  = eta_non_b_user;
   //Creation
   pMother1 = pMother1_user;
   b      = b_user;
