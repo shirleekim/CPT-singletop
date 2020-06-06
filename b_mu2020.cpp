@@ -76,16 +76,17 @@ int main (){
     for (int i=0; i<Events; i++){
 
       if (go->nature!=0) {
-        MatrixSingleTop *M = new MatrixSingleTop(go->pMother1[i], go->b[i], go->pt[i], go->p3[i], go->pMother1_PID[i], go->p3_PID[i], go->b_PID[i], go->nature[i], go->pTmu[i], go->etamu[i], go->pTelec[i], go->etaElec[i]);
+        MatrixSingleTop *M = new MatrixSingleTop(go->pMother1[i], go->b[i], go->pt[i], go->p3[i], go->pMother1_PID[i], go->p3_PID[i], go->b_PID[i], go->nature[i], go->pTmu[i], go->etamu[i], go->pTelec[i], go->etaElec[i], go->pTb[i], go->pTnon_b[i], go->eta_b[i], go->eta_non_b[i]);
         choice = go->nature[i];
           //Treat t-channel in the case of tq and tbarq
           if (choice == 1) {
             nbtqprecut++;
-            if (go->etaElec[i]<1.479 && go->pTelec[i]>35){
+            if (abs(go->etaElec[i])<1.479 && go->pTelec[i]>35){
 
               if (diagram == "t")
               {
                 SME = M->getMbq_mu();
+                  cout << "choice 1 elec selected!!" << endl;
               }
               if (diagram == "tbar")
               {
@@ -97,7 +98,7 @@ int main (){
               Wtq+=SME*ratio;//Sum each calculated change ratio at each iteration
               nbtq++;         //Count the number of time we calculate a charge ratio to calculate the mean value later
             }
-             else {if (go->etamu[i]<2.4 && go->pTmu[i]>26){
+             else if (abs(go->etamu[i])<2.4 && go->pTmu[i]>26){
                if (diagram == "t")
                {
                  SME = M->getMbq_mu();
@@ -110,13 +111,46 @@ int main (){
               ratio = 1/SM;
               Wtq+=SME*ratio;
               nbtq++;
-            }}
+            }
+
+            else if (abs(go->eta_b[i])<2.4 && go->pTb[i]>40){
+              if (diagram == "t")
+              {
+                SME = M->getMbq_mu();
+                cout << "choice 1 b selected!!" << endl;
+              }
+              if (diagram == "tbar")
+              {
+                SME = -1.0*M->getMbq_mu();
+              }
+             SM  = M->getMbq();
+             ratio = 1/SM;
+             Wtq+=SME*ratio;
+             nbtq++;
+           }
+           else if (abs(go->eta_non_b[i])<4.7 && go->pTnon_b[i]>40){
+             if (diagram == "t")
+             {
+               SME = M->getMbq_mu();
+               cout << "choice 1 non b selected!!" << endl;
+             }
+             if (diagram == "tbar")
+             {
+               SME = -1.0*M->getMbq_mu();
+             }
+            SM  = M->getMbq();
+            ratio = 1/SM;
+            Wtq+=SME*ratio;
+            nbtq++;
           }
+        }
+
+
 
           //Treat t-channel in the case of tqbar and tbarqbar
           if (choice == 2 ){
             nbtqbarprecut++;
-            if (go->etaElec[i]<1.479 && go->pTelec[i]>35){
+            if (abs(go->etaElec[i])<1.479 && go->pTelec[i]>35){
               if (diagram == "t")
               {
                 SME = M->getMbqbar_mu();
@@ -135,7 +169,7 @@ int main (){
               Wtqbar+=SME*ratio;
               nbtqbar++;
               }
-            else {if (go->etamu[i]<2.4 && go->pTmu[i]>26){
+            else if (abs(go->etamu[i])<2.4 && go->pTmu[i]>26){
               if (diagram == "t")
               {
                 SME = M->getMbqbar_mu();
@@ -149,15 +183,46 @@ int main (){
               ratio = 1/SM;
               Wtqbar+=SME*ratio;
               nbtqbar++;
-            }}
+            }
+            else if (abs(go->eta_b[i])<2.4 && go->pTb[i]>40){
+              if (diagram == "t")
+              {
+                SME = M->getMbq_mu();
+                  cout << "choice 2 b selected!!" << endl;
+              }
+              if (diagram == "tbar")
+              {
+                SME = -1.0*M->getMbq_mu();
+              }
+             SM  = M->getMbq();
+             ratio = 1/SM;
+             Wtqbar+=SME*ratio;
+             nbtqbar++;
+           }
+           else if (abs(go->eta_non_b[i])<4.7 && go->pTnon_b[i]>40){
+             if (diagram == "t")
+             {
+               SME = M->getMbq_mu();
+                 cout << "choice 2 non b selected!!" << endl;
+             }
+             if (diagram == "tbar")
+             {
+               SME = -1.0*M->getMbq_mu();
+             }
+            SM  = M->getMbq();
+            ratio = 1/SM;
+            Wtqbar+=SME*ratio;
+            nbtqbar++;
+          }
+          }
       }
 
-      delete M;
+      //delete M;
 
     }
   }
-  }
 
+/*
   if (diagram == "tw" || diagram == "tbarw")
   {
     Analyzetw* go;
@@ -178,21 +243,7 @@ int main (){
 
           //Ttreat tW-channel in the case of t and tbar
           if(choice == 3){
-            if (go->etaElec[i]<2.4 && go->pTelec[i]>20){
-              if (diagram == "tbarw")
-              {
-                SME = -1.0*M->getMbg_mu();
-              }
-              if (diagram == "tw")
-              {
-                SME = M->getMbg_mu();
-              }
-              SM  = M->getMbg();
-              ratio = 1/SM;
-              Wtw+=SME*ratio;
-              nbtw++;}
-
-            else {if (go->etamu[i]<2.4 && go->pTmu[i]>20){
+            if (abs(go->etaElec[i])<2.4 && go->pTelec[i]>20){
               if (diagram == "tbarw")
               {
                 SME = -1.0*M->getMbg_mu();
@@ -205,14 +256,58 @@ int main (){
               ratio = 1/SM;
               Wtw+=SME*ratio;
               nbtw++;
-            }}
+            }
+
+            else if (abs(go->etamu[i])<2.4 && go->pTmu[i]>20){
+              if (diagram == "tbarw")
+              {
+                SME = -1.0*M->getMbg_mu();
+              }
+              if (diagram == "tw")
+              {
+                SME = M->getMbg_mu();
+              }
+              SM  = M->getMbg();
+              ratio = 1/SM;
+              Wtw+=SME*ratio;
+              nbtw++;
+            }
+
+            else if (abs(go->eta_b[i])<2.4 && go->pTb[i]>40){
+              if (diagram == "t")
+              {
+                SME = M->getMbq_mu();
+              }
+              if (diagram == "tbar")
+              {
+                SME = -1.0*M->getMbq_mu();
+              }
+             SM  = M->getMbq();
+             ratio = 1/SM;
+             Wtq+=SME*ratio;
+             nbtq++;
+           }
+           else if (abs(go->eta_non_b[i])<4.7 && go->pTnon_b[i]>40){
+             if (diagram == "t")
+             {
+               SME = M->getMbq_mu();
+             }
+             if (diagram == "tbar")
+             {
+               SME = -1.0*M->getMbq_mu();
+             }
+            SM  = M->getMbq();
+            ratio = 1/SM;
+            Wtq+=SME*ratio;
+            nbtq++;
+          }
           }
 
       delete M;
 
     }
   }
-  }
+  */
 cout<<1<<endl;
 //Calcuate the ratio considering we have different diagram for a single generation
 //When we simule tq and so tqbar, we have different cross-sect for tq and tqbar. The following expression weights each calculated matrix element.
@@ -225,7 +320,7 @@ double pourctqbar = 1.0*nbtqbarprecut/nbevent;
 
 
 if (diagram == "t"){
-  WtAv =pourctq*Wtq*ratiotq + pourctqbar*Wtqbar*ratiotqbar;
+  WtAv = pourctq*Wtq*ratiotq + pourctqbar*Wtqbar*ratiotqbar;
   //WtAv = Wtq*ratiotq;
   //WtAv = Wtqbar*ratiotqbar;
   ofstream tchan("results/matrix_elements/t-channel"+version+".txt");
@@ -264,8 +359,8 @@ double b_muvalue = atof(b_mu.c_str());
 //string buff = to_string(b_mu);
 string nameFile = "results/modulation/Modulation_Temporelle_13TeV_b"+b_mu+""+version+".root";
 TLorentzVector b_mu0 (b_muvalue, 0., 0., 0.);
-TLorentzVector b_mu1 (0., b_muvalue, 0., 0.);
-TLorentzVector b_mu2 (0., 0., b_muvalue, 0.);
+TLorentzVector b_mu1 (0., 0., 0., 0.); //modifie par sukyung
+TLorentzVector b_mu2 (0., 0., 0., 0.); //
 TLorentzVector b_mu3 (0., 0., 0., b_muvalue);
 
 TFile* File = new TFile (nameFile.c_str(), "UPDATE");
