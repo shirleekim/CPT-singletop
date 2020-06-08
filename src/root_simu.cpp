@@ -119,15 +119,15 @@ void root_simu::Loop()
           pTmu[jentry] = Particle_PT[part];
           etamu[jentry]= abs(Particle_Eta[part]);
            }
-           /* //-----------A remplir ----------//
-        if(abs(Particle_PID[part]==  && Particle_Status[part]==1){
+        /*    //-----------A remplir ----------//
+        if(abs(Particle_PID[part])==14  && Particle_Status[part]==1){
           pTb[jentry]    = Particle_PT[part];
-          [jentry]  = abs(Particle_Eta[part]);
+          eta_b[jentry]  = abs(Particle_Eta[part]);
            }
-        if(abs(Particle_PID[part]==  && Particle_Status[part]==1){
+        if(abs(Particle_PID[part])==12  && Particle_Status[part]==1){
           pTnon_b[jentry] = Particle_PT[part];
           eta_non_b[jentry] = abs(Particle_Eta[part]);
           }
-          */
+*/
 }
 }}
