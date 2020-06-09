@@ -143,6 +143,8 @@ double MatrixSingleTop::calculateMbqbar(){
       double frac9    = (8*mW2-12*mt2)/s;
       double frac10   = (4*mW2-4*mt2)/s;
       double frac11   = (mt2+3*s)/mW2;
+
+
       double constant = ckm[b_PID][pt_PID]*ckm[b_PID][pt_PID]*gW2*gS2/12;; //corrig par sukyung
       //return Mbg_mu //(eq48)
       return -constant*(frac1*(pMother1*(mt2-2*mW2)+p3*mt2+pt*t)+8*frac2*(frac3*p3-p3-b)+frac4*(b*(2*mt2*mt2-4*mW2*mW2-mt2*s)

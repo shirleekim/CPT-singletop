@@ -139,24 +139,24 @@ void Analyzetw::Loop()
         }
 
       }
-      /*  ///-------------A remplir--------------//
-      if(abs(Particle_PID[part])==14  && Particle_Status[part]==1)
+        ///-------------A remplir--------------//
+      if(abs(Particle_PID[part])==5  && (Particle_Status[part]==1 or Particle_Status[part]==-1))
       {
-        if (pTmu[jentry]>Particle_PT[part] || etamu[jentry]<abs(Particle_Eta[part]))
+        if (pTb[jentry]>Particle_PT[part] || eta_b[jentry]<abs(Particle_Eta[part]))
         {
           pTb[jentry]    = Particle_PT[part];
           eta_b[jentry]  = abs(Particle_Eta[part]);
         }
       }
-      if(abs(Particle_PID[part])==12  && Particle_Status[part]==1)
+      else if(abs(Particle_PID[part])<=6  && Particle_Status[part]==1)
       {
-        if (pTmu[jentry]>Particle_PT[part] || etamu[jentry]<abs(Particle_Eta[part]))
+        if (pTnon_b[jentry]>Particle_PT[part] || eta_non_b[jentry]<abs(Particle_Eta[part]))
         {
           pTnon_b[jentry] = Particle_PT[part];
           eta_non_b[jentry] = abs(Particle_Eta[part]);
         }
       }
-*/
+
     }
 
 
