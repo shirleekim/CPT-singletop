@@ -121,11 +121,11 @@ void root_simu::Loop()
            }
            //------------only for MG1 MG2, MG3//
 
-        if(abs(Particle_PID[part])==5  ){ //&& (Particle_Status[part]==1)
+        if(abs(Particle_PID[part])==5 && (Particle_Status[part]==1) ){ //&& )
           pTb[jentry]    = Particle_PT[part];
           eta_b[jentry]  = abs(Particle_Eta[part]);
            }
-        if(abs(Particle_PID[part]) <= 6 && abs(Particle_PID[part])!=5 ){ //&& Particle_Status[part]==1 
+        if(abs(Particle_PID[part]) <= 6 && abs(Particle_PID[part])!=5 && Particle_Status[part]==1){ //
           pTnon_b[jentry] = Particle_PT[part];
           eta_non_b[jentry] = abs(Particle_Eta[part]);
           }
