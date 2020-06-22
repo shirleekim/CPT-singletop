@@ -7,7 +7,7 @@
 4. setting.cpp is under CPT-singletop/include
   - Description : It sets some parameters for each case (MG0, MG1, MG2, MG3)
   - Compilation: If you change any things in this program, you have to do "make clean" before "make" 
-  - It will ask which simulation you want to analyse 
+  - It will ask which simulation you want to analyse when you do step 6, 7, 8, 9 
 
 5. Compilation : in CPT-singletop, do "make clean" then "make" 
 6. Run b_mu2020.cpp twice, once with t, and once with tbar
