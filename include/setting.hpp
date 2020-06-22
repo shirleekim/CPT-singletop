@@ -26,13 +26,13 @@ do{
 
 if (mg==0){
 
-  version = "";
+  version = "_mg0";
   simulation_t = "1Mt13TeV";//MG0 = 1Mt13TeV ,
   simulation_tbar = "1Mtbar13TeV"; // MG0 = 1Mtbar13TeV
   nbevent = 1e6; // mg0 : 1e6, // mg 1,2,3: 1e5
   b_mu = "1";
   bmu = 1;
-  range = 7;
+  range = 6;
   stat_error = 4.61;
   modul_range = 1e5;
   times = 10;
@@ -47,7 +47,7 @@ if (mg==1){
   nbevent = 1e5; // mg0 : 1e6, // mg 1,2,3: 1e5
   b_mu = "1";
   bmu = 1;
-  range = 7;
+  range = 10;
   stat_error = 4.67;
   modul_range = 1e5;
   times = 10;
@@ -56,14 +56,14 @@ if (mg==1){
 
 if (mg==2){
 
-  version = "_mg2_2";
+  version = "_mg2";
   simulation_t = "MG2";//MG0 = 1Mt13TeV ,
   simulation_tbar = "MG2"; // MG0 = 1Mtbar13TeV
   nbevent = 1e5;
-  b_mu = "100";
-  bmu = 100;
-  range = 20;
-  stat_error = 1511.39;
+  b_mu = "1";
+  bmu = 1;
+  range = 10;
+  stat_error = 3.55;
   modul_range = 12e4;
   times = 1;
 
@@ -72,14 +72,14 @@ if (mg==2){
 
 if (mg==3){
 
-  version = "_mg3_2";
+  version = "_mg3";
   simulation_t = "MG3";//MG0 = 1Mt13TeV ,
   simulation_tbar = "MG3"; // MG0 = 1Mtbar13TeV
   nbevent = 1e5;
-  b_mu = "100";
-  bmu=100;
-  range = 30;
-  stat_error = 2775.47;
+  b_mu = "1";
+  bmu=1;
+  range = 7;
+  stat_error = 3.55;
   modul_range = 12e4;
   times = 1;
 
