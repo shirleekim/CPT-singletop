@@ -2,7 +2,7 @@
 
 1. under CPT-singletop, mkdir results, mkdir data
 2. under results, mkdir (uncertainty, modulation, matrix_element, graph, histo)
-3. under data, put 1Mt13TeV.root,1Mtbar13TeV.root, 1Mt13TeV_2020.root, MG1.root, MG2.root, MG3.root 
+3. under data, put 1Mt13TeV.root,1Mtbar13TeV.root, MG1.root, MG2.root, MG3.root 
 
 4. setting.cpp is under CPT-singletop/include
   - Description : It sets some parameters for each case (MG0, MG1, MG2, MG3)
